@@ -17,6 +17,9 @@
 
 package io.plaidapp.core.data;
 
+import io.plaidapp.core.dribbble.data.search.DribbbleSearchService;
+
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -29,6 +32,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public abstract class BaseDataManager<T> implements DataLoadingSubject {
 
     private final AtomicInteger loadingCount;
+    @Inject
+    DribbbleSearchService dribbbleSearchApi;
     private List<DataLoadingCallbacks> loadingCallbacks;
     private OnDataLoadedCallback<T> onDataLoadedCallback;
 

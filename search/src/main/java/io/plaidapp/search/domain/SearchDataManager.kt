@@ -16,14 +16,12 @@
 
 package io.plaidapp.search.domain
 
-import android.content.Context
 import io.plaidapp.core.data.BaseDataManager
 import io.plaidapp.core.data.LoadSourceCallback
 import io.plaidapp.core.data.PlaidItem
 import io.plaidapp.core.data.Result
 import io.plaidapp.core.data.Source
 import io.plaidapp.core.designernews.domain.SearchStoriesUseCase
-import io.plaidapp.core.designernews.provideSearchStoriesUseCase
 import io.plaidapp.core.dribbble.data.ShotsRepository
 import io.plaidapp.core.dribbble.data.api.model.Shot
 import javax.inject.Inject
@@ -33,12 +31,10 @@ import javax.inject.Inject
  * responsible for providing the [onDataLoaded] method to do something with the data.
  */
 class SearchDataManager @Inject constructor(
-    context: Context,
     onDataLoadedCallback: BaseDataManager.OnDataLoadedCallback<List<PlaidItem>>,
-    private val shotsRepository: ShotsRepository
-) : BaseDataManager<List<PlaidItem>>(), LoadSourceCallback {
-
+    private val shotsRepository: ShotsRepository,
     private val searchStories: SearchStoriesUseCase
+) : BaseDataManager<List<PlaidItem>>(), LoadSourceCallback {
 
     // state
     var query = ""
@@ -47,7 +43,6 @@ class SearchDataManager @Inject constructor(
 
     init {
         setOnDataLoadedCallback(onDataLoadedCallback)
-        searchStories = provideSearchStoriesUseCase(context)
     }
 
     fun searchFor(newQuery: String) {
